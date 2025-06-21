@@ -9,7 +9,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 
-const PORT = procces.env.PORT ? procces.env.PORT : '3000';
+const PORT = process.env.PORT ? process.env.PORT : "3000";
 
 //middle wares
 app.use(express.urlencoded({extended:true}));
