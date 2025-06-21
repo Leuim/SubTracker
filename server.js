@@ -31,8 +31,12 @@ mongoose.connection.on('connected', ()=>{
     console.log(`Connected to: ${mongoose.connection.name}`);
 })
 
+//Controllers
+const authCtrl = require('./controllers/user');
+app.use('/auth', authCtrl);
+
 app.get('/', async (req,res)=>{
-    res.render('index.ejs')
+    res.render('index.ejs');
 })
 
 app.listen(PORT,()=>{
