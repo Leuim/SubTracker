@@ -8,7 +8,9 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
-
+const expressLayouts = require('express-ejs-layouts');
+const isSignedIn = require('./middlewares/isSignedIn');
+const passUserToView = require('./middlewares/passUserToView');
 const PORT = process.env.PORT ? process.env.PORT : "3000";
 
 //middle wares
@@ -22,6 +24,10 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+app.set('layout', './layouts/layout');
+app.use(passUserToView)
 
 // DB connection
 
@@ -36,7 +42,7 @@ const authCtrl = require('./controllers/user');
 app.use('/auth', authCtrl);
 
 app.get('/', async (req,res)=>{
-    res.render('index.ejs');
+    res.render('index.ejs',{title:'SubTracker'});
 })
 
 app.listen(PORT,()=>{

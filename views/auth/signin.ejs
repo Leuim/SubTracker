@@ -1,0 +1,10 @@
+<h2>Sign in</h2>
+<% if(error){ %>
+<p><%= error %></p>
+<% } %>
+<form action="/auth/sign-in" method="post">
+  <input type="text" name="username" id="username" placeholder="Username">
+  <input type="text" name="email" id="email" placeholder="E-mail">
+  <input type="password" name="password" id="password" placeholder="Password">
+  <button type="submit">Sign in</button>
+</form>
