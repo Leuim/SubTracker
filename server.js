@@ -43,7 +43,7 @@ const subcriptionsCtrl = require('./controllers/subscriptions')
 app.use('/auth', authCtrl);
 app.use('/subscriptions', isSignedIn, subcriptionsCtrl)
 app.get('/', async (req,res)=>{
-    res.render('index.ejs',{title:'SubTracker'});
+    res.render('index.ejs', {title:'SubTracker'});
 })
 
 app.listen(PORT,()=>{

@@ -1,6 +1,6 @@
 <% if(userSubscriptions && userSubscriptions.length > 0){ %>
 <% userSubscriptions.forEach((subscription)=>{ %>
-<div class="contianer bg-light">
+<div class="contianer">
   <h4><%= subscription.name %></h4>
   <h4><%= subscription.amount %></h4>
   <h4><%= subscription.billingCycle %></h4>
@@ -9,6 +9,7 @@
   <h4><%= subscription.status %></h4>
   <h4><%= subscription.notes %></h4>
   <h4><%= subscription.outstandingAmount %></h4>
+  <a href="/subscriptions/<%= subscription._id %>"><button btn btn-primary>More Info</button></a>
 </div>
 <% })}else{ %>
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">

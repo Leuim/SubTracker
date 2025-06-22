@@ -1,17 +1,17 @@
 <nav class="container-fluid p-2 black d-flex justify-content-between align-items-center">
   <ul class="nav">
-    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+    <li class="nav-item"><a class="nav-link fw-bold" href="/">Home</a></li>
     <% if(user) { %>
-      <li class="nav-item"><a class="nav-link" href="/subscriptions">Subscriptions</a></li>
-      <li class="nav-item"><a class="nav-link" href="/transactions">Transactions</a></li>
+      <li class="nav-item"><a class="nav-link fw-bold" href="/subscriptions">Subscriptions</a></li>
+      <li class="nav-item"><a class="nav-link fw-bold" href="/transactions">Transactions</a></li>
       <% } %>
   </ul>  
   <ul class="nav">
     <% if(user){ %>
-    <li class="nav-item"><a class="nav-link" href="/auth/sign-out">Sign Out</a></li>
+    <li class="nav-item"><a class="nav-link fw-bold" href="/auth/sign-out">Sign Out</a></li>
     <% }else{ %>
-    <li class="nav-item"><a class="nav-link" href="/auth/sign-in">Sign In</a></li>
-    <li class="nav-item"><a class="nav-link" href="/auth/sign-up">Sign Up</a></li>
+    <li class="nav-item"><a class="nav-link fw-bold" href="/auth/sign-in">Sign In</a></li>
+    <li class="nav-item"><a class="nav-link fw-bold" href="/auth/sign-up">Sign Up</a></li>
     <% } %>
   </ul>
 </nav>

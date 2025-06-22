@@ -21,7 +21,17 @@ router.post('/', async (req, res) => {
         req.body.outstandingAmount = 0
         await Subscription.create(req.body)
         res.redirect('/subscriptions')
-    } catch(error){
+    } catch (error) {
+        console.log(error);
+        res.redirect('/')
+    }
+})
+
+router.get('/:subscriptionId', async (req, res) => {
+    try {
+        const subscriptionInDatabase = await Subscription.findById(req.params.subscriptionId).populate('owner')
+        res.render('subscriptions/show.ejs', {title:subscriptionInDatabase.name, subscriptionInDatabase})
+    } catch (error) {
         console.log(error);
         res.redirect('/')
     }

@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <h1>Welcome to SubTrack</h1>
+  <% if(user){ %>
+  <h1>Welcome to SubTrack, <%= user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase(); %></h1>
+  <% }else{ %>
+  <h1>Welcome to SubTrack, Please sign in</h1>
+  <% } %>
 </body>
+
 </html>
