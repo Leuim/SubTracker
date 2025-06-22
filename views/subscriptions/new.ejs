@@ -1,0 +1,42 @@
+<div class="container d-flex flex-column align-items-center py-5">
+  <h2 class="mb-2">Add Subscription</h2>
+  <form action="/subscriptions" method="POST" class="w-100" style="max-width: 500px;">
+    <div class="mb-1">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" required />
+    </div>
+    <div class="mb-1">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" name="amount" id="amount" class="form-control" required />
+    </div>
+    <div class="mb-1">
+      <label for="billingCycle" class="form-label">Billing Cycle</label>
+      <select name="billingCycle" id="billingCycle" class="form-select">
+        <option value="Monthly">Monthly</option>
+        <option value="Annual">Annual</option>
+      </select>
+    </div>
+    <div class="mb-1">
+        <label for="nextBillingDate" class="form-label">Next Billing Date</label>
+        <input type="date" name="nextBillingDate" id="nextBillingDate" class="form-control">
+    </div>
+    <div class="mb-1">
+      <label for="status" class="form-label">Status</label>
+      <select name="status" id="status" class="form-select">
+        <option value="Active">Active</option>
+        <option value="Paused">Paused</option>
+        <option value="Canceled">Canceled</option>
+      </select>
+    </div>
+    <div class="mb-1">
+      <label for="category" class="form-label">Category</label>
+      <input type="text" name="category" id="category" class="form-control" />
+    </div>
+    <div class="mb-1">
+      <label for="note" class="form-label">Notes</label>
+      <textarea name="note" id="note" class="form-control" placeholder="Notes"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Add Subscription</button>
+  </form>
+</div>

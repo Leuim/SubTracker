@@ -25,6 +25,7 @@ router.post('/sign-up', async (req, res) => {
         const user = await User.create(req.body)
         req.session.user = {
             username: user.username,
+            email: user.email,
             _id: user._id
         }
         res.redirect('/')
@@ -54,6 +55,7 @@ router.post('/sign-in', async (req, res) => {
         }
         req.session.user = {
             username: userInDatabase.username,
+            email:userInDatabase.email,
             _id: userInDatabase._id
         }
 

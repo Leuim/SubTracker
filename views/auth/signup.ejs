@@ -1,11 +1,22 @@
-<h2>Sign up</h2>
-<% if(error){ %>
-<p><%= error %></p>
-<% } %>
-<form action="/auth/sign-up" method="post">
-    <input type="text" name="username" id="username" placeholder="Username">
-    <input type="text" name="email" id="email" placeholder="E-mail">
-    <input type="password" name="password" id="password" placeholder="Password">
-    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm Password">
-    <button type="submit">Sign Up</button>
-</form>
+<div class="container d-flex flex-column align-items-center py-5">
+  <h2 class="mb-3 fw-bold">Sign Up</h2>
+  <% if(error){ %>
+  <p class="mb-1 text-danger"><%= error %></p>
+  <% } %>
+  <form action="/auth/sign-up" method="post">
+    <div class="mb-2">
+      <input type="text" name="username" id="username" placeholder="Username" class="form-control">
+    </div>
+    <div class="mb-2">
+      <input type="text" name="email" id="email" placeholder="E-mail" class="form-control">
+    </div>
+    <div class="mb-2">
+      <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+
+    </div>
+    <div class="mb-2">
+      <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm Password" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+  </form>
+</div>

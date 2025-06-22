@@ -1,0 +1,22 @@
+<% if(userSubscriptions && userSubscriptions.length > 0){ %>
+<% userSubscriptions.forEach((subscription)=>{ %>
+<div class="contianer bg-light">
+  <h4><%= subscription.name %></h4>
+  <h4><%= subscription.amount %></h4>
+  <h4><%= subscription.billingCycle %></h4>
+  <h4><%= subscription.nextBillingDate %></h4>
+  <h4><%= subscription.category %></h4>
+  <h4><%= subscription.status %></h4>
+  <h4><%= subscription.notes %></h4>
+  <h4><%= subscription.outstandingAmount %></h4>
+</div>
+<% })}else{ %>
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+  <p class="text-center text-capitalize fw-bold text-mute">
+    You have not added any subscriptions yet.
+  </p>
+  <a href="/subscriptions/new">
+    <button class="btn btn-outline-primary">Add A Subscription</button>
+  </a>
+</div>
+<% } %>

@@ -38,9 +38,10 @@ mongoose.connection.on('connected', ()=>{
 })
 
 //Controllers
-const authCtrl = require('./controllers/user');
+const authCtrl = require('./controllers/users');
+const subcriptionsCtrl = require('./controllers/subscriptions')
 app.use('/auth', authCtrl);
-
+app.use('/subscriptions', isSignedIn, subcriptionsCtrl)
 app.get('/', async (req,res)=>{
     res.render('index.ejs',{title:'SubTracker'});
 })
