@@ -11,6 +11,8 @@ const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
 const isSignedIn = require('./middlewares/isSignedIn');
 const passUserToView = require('./middlewares/passUserToView');
+const passCurrentPathToView = require('./middlewares/passCurrentPathToView')
+const path = require('path')
 const PORT = process.env.PORT ? process.env.PORT : "3000";
 
 //middle wares
@@ -28,7 +30,8 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout', './layouts/layout');
 app.use(passUserToView)
-
+app.use(passCurrentPathToView)
+app.use(express.static(path.join(__dirname, 'public')));
 // DB connection
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -40,8 +43,10 @@ mongoose.connection.on('connected', ()=>{
 //Controllers
 const authCtrl = require('./controllers/users');
 const subcriptionsCtrl = require('./controllers/subscriptions')
+const transactionCtrl = require('./controllers/transactions');
 app.use('/auth', authCtrl);
 app.use('/subscriptions', isSignedIn, subcriptionsCtrl)
+app.use(`/subscriptions/:subscreptionId/transactions`, isSignedIn, transactionCtrl)
 app.get('/', async (req,res)=>{
     res.render('index.ejs', {title:'SubTracker'});
 })
