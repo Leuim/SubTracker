@@ -1,0 +1,64 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="bg-white p-4 rounded-4 shadow-sm">
+                <h2 class="mb-3 text-center fw-semibold">Edit Subscription</h2>
+                <form action="/subscriptions/<%= currentSubscription._id  %>?_method=PUT" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" id="name" class="form-control rounded-3"
+                            value="<%= currentSubscription.name %>" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" name="amount" id="amount" class="form-control rounded-3"
+                            value="<%= currentSubscription.amount %>" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="billingCycle" class="form-label">Billing Cycle</label>
+                        <select name="billingCycle" id="billingCycle" class="form-select rounded-3">
+                            <option value="Monthly" <% if(currentSubscription.billingCycle==='Monthly' ){ %> selected
+                                <% } %>>
+                                    Monthly</option>
+                            <option value="Annual" <% if(currentSubscription.billingCycle==='Annual' ){ %> selected
+                                <% } %>>
+                                    Annual</option>
+                        </select>
+                    </div>
+                    <% const formatDate=(date)=> {
+                        const d = new Date(date);
+                        return d.toISOString().split('T')[0];
+                        };
+                    %>
+                        <div class="mb-3">
+                            <label for="nextBillingDate" class="form-label">Next Billing Date</label>
+                            <input type="date" name="nextBillingDate" id="nextBillingDate"
+                                class="form-control rounded-3" value="<%= formatDate(currentSubscription.nextBillingDate) %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select name="status" id="status" class="form-select rounded-3">
+                                <option value="Active" <% if(currentSubscription.status==='Active' ){ %> selected <%
+                                        } %>>Active</option>
+                                <option value="Paused" <% if(currentSubscription.status==='Paused' ){ %> selected <%
+                                        } %>>Paused</option>
+                                <option value="Canceled" <% if(currentSubscription.status==='Canceled' ){ %> selected
+                                    <% } %>>Canceled</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <input type="text" name="category" id="category" class="form-control rounded-3"
+                                value="<%= currentSubscription.category %>" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="note" class="form-label">Notes</label>
+                            <textarea name="notes" id="notes" class="form-control rounded-3"
+                                placeholder="Notes"><%= currentSubscription.notes %></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-3">Update Subscription</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

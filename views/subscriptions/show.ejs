@@ -1,10 +1,20 @@
 <div class="contianer">
-  <h4><%= subscriptionInDatabase.name %></h4>
-  <h4><%= subscriptionInDatabase.amount %></h4>
-  <h4><%= subscriptionInDatabase.billingCycle %></h4>
-  <h4><%= subscriptionInDatabase.nextBillingDate %></h4>
-  <h4><%= subscriptionInDatabase.category %></h4>
-  <h4><%= subscriptionInDatabase.status %></h4>
-  <h4><%= subscriptionInDatabase.notes %></h4>
-  <h4><%= subscriptionInDatabase.outstandingAmount %></h4>
+  <h4><%= currentSubscription.name %></h4>
+  <h4><%= currentSubscription.amount %></h4>
+  <h4><%= currentSubscription.billingCycle %></h4>
+  <h4><%= currentSubscription.nextBillingDate %></h4>
+  <h4><%= currentSubscription.category %></h4>
+  <h4><%= currentSubscription.status %></h4>
+  <h4><%= currentSubscription.notes %></h4>
+  <h4><%= currentSubscription.outstandingAmount %></h4>
+  <form action="/subscriptions/<%= currentSubscription._id %>?_method=DELETE" method="POST" style="display: inline;">
+    <button type="submit" style="background: none; border: none; cursor: pointer;" title="Delete">
+      <i class="fas fa-trash btn btn-danger" ></i>
+    </button>
+  </form>
+  <a href="/subscriptions/<%= currentSubscription._id %>/edit">
+    <button type="submit" style="background: none; border: none; cursor: pointer;" title="Edit">
+      <i class="fas fa-pen btn btn-primary" ></i>
+    </button>
+  </a>
 </div>

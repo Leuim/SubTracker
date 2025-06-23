@@ -29,7 +29,7 @@ const subscriptionSchema = mongoose.Schema({
     outstandingAmount:{
         type:Number
     },
-    Notes:{
+    notes:{
         type:String
     },
     owner:{

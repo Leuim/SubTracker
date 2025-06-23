@@ -29,9 +29,49 @@ router.post('/', async (req, res) => {
 
 router.get('/:subscriptionId', async (req, res) => {
     try {
-        const subscriptionInDatabase = await Subscription.findById(req.params.subscriptionId).populate('owner')
-        res.render('subscriptions/show.ejs', {title:subscriptionInDatabase.name, subscriptionInDatabase})
+        const currentSubscription = await Subscription.findById(req.params.subscriptionId).populate('owner')
+        res.render('subscriptions/show.ejs', { title: currentSubscription.name, currentSubscription })
     } catch (error) {
+        console.log(error);
+        res.redirect('/')
+    }
+})
+
+router.get('/:subscriptionId/edit', async (req, res) => {
+    try {
+        const currentSubscription = await Subscription.findById(req.params.subscriptionId).populate('owner')
+        res.render('subscriptions/edit.ejs', { title: currentSubscription.name, currentSubscription })
+    } catch (error) {
+        console.log(error);
+        res.redirect('/')
+    }
+})
+
+
+router.put('/:subscriptionId', async (req, res) => {
+    try {
+        const currentSubscription = await Subscription.findById(req.params.subscriptionId)
+        if (currentSubscription.owner.equals(req.session.user._id)) {
+            console.log('Received update body:', req.body);
+            await Subscription.findByIdAndUpdate(req.params.subscriptionId, req.body)
+            res.redirect(`/subscriptions/${currentSubscription._id}`)
+        } else {
+            res.render('subscriptions/edit.ejs', { error: 'You dont have permission to edit this.', title: currentSubscription.name, currentSubscription })
+        }
+    } catch (error) {
+        console.log(error);
+        res.redirect('/')
+    }
+})
+
+router.delete('/:subscreptionId', async (req,res)=>{
+    try{
+        const currentSubscription = await Subscription.findById(req.params.subscreptionId)
+        if(currentSubscription.owner.equals(req.session.user._id)){
+            await Subscription.findByIdAndDelete(req.params.subscreptionId)
+            res.redirect('/subscriptions')
+        }
+    } catch(error){
         console.log(error);
         res.redirect('/')
     }
