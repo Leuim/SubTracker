@@ -46,9 +46,10 @@ const subcriptionsCtrl = require('./controllers/subscriptions')
 const transactionCtrl = require('./controllers/transactions');
 app.use('/auth', authCtrl);
 app.use('/subscriptions', isSignedIn, subcriptionsCtrl)
-app.use(`/subscriptions/:subscreptionId/transactions`, isSignedIn, transactionCtrl)
+app.use(`/transactions`, isSignedIn, transactionCtrl)
 app.get('/', async (req,res)=>{
     res.render('index.ejs', {title:'SubTracker'});
+    console.log(req.path);
 })
 
 app.listen(PORT,()=>{

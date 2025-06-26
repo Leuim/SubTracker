@@ -1,18 +1,18 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light shadow">
+<nav class="navbar nav-pills navbar-expand-sm navbar-light bg-light shadow">
   <div class="container-fluid d-flex justify-content-between align-items-center">
     <ul class="nav">
-      <li class="nav-item me-3"><a class="nav-link fw-bold" href="/">Home</a></li>
+      <li class="nav-item me-3"><a class="nav-link fw-bold <%=currentPath === '/' ? 'active' : ''%>" href="/">Home</a></li>
       <% if(user) { %>
-        <li class="nav-item me-3"><a class="nav-link fw-bold" href="/subscriptions">Subscriptions</a></li>
-        <li class="nav-item"><a class="nav-link fw-bold" href="/transactions">Transactions</a></li>
+        <li class="nav-item me-3"><a class="nav-link fw-bold <%= currentPath.startsWith('/subscriptions') ? 'active' : '' %>" href="/subscriptions">Subscriptions</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold <%= currentPath.startsWith('/transactions') ? 'active' : '' %>" href="/transactions">Transactions</a></li>
       <% } %>
     </ul>
     <ul class="nav">
       <% if(user){ %>
         <li class="nav-item"><a class="nav-link fw-bold" href="/auth/sign-out">Sign Out</a></li>
       <% } else { %>
-        <li class="nav-item me-3"><a class="nav-link fw-bold" href="/auth/sign-in">Sign In</a></li>
-        <li class="nav-item"><a class="nav-link fw-bold" href="/auth/sign-up">Sign Up</a></li>
+        <li class="nav-item me-3"><a class="nav-link fw-bold <%= currentPath.startsWith('/auth/sign-in') ? 'active' : '' %>" href="/auth/sign-in">Sign In</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold <%= currentPath.startsWith('/auth/sign-up') ? 'active' : '' %>" href="/auth/sign-up">Sign Up</a></li>
       <% } %>
     </ul>
   </div>

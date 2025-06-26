@@ -1,20 +1,69 @@
-<div class="contianer">
-  <h4><%= currentSubscription.name %></h4>
-  <h4><%= currentSubscription.amount %></h4>
-  <h4><%= currentSubscription.billingCycle %></h4>
-  <h4><%= currentSubscription.nextBillingDate %></h4>
-  <h4><%= currentSubscription.category %></h4>
-  <h4><%= currentSubscription.status %></h4>
-  <h4><%= currentSubscription.notes %></h4>
-  <h4><%= currentSubscription.outstandingAmount %></h4>
-  <form action="/subscriptions/<%= currentSubscription._id %>?_method=DELETE" method="POST" style="display: inline;">
-    <button type="submit" style="background: none; border: none; cursor: pointer;" title="Delete">
-      <i class="fas fa-trash btn btn-danger" ></i>
-    </button>
-  </form>
-  <a href="/subscriptions/<%= currentSubscription._id %>/edit">
-    <button type="submit" style="background: none; border: none; cursor: pointer;" title="Edit">
-      <i class="fas fa-pen btn btn-primary" ></i>
-    </button>
-  </a>
+<div class="contianer mt-5">
+  <div class="row mb-4 justify-content-center align-items-center">
+    <div class="col-2">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="card-title"><%= currentSubscription.name %></h3>
+          <p class="card-text">
+            <strong>Amount:</strong> $<%= currentSubscription.amount.toFixed(2) %><br>
+            <strong>Billing Cycle:</strong> <%= currentSubscription.billingCycle %><br>
+            <strong>Status:</strong> 
+            <span class="badge bg-<%= currentSubscription.status === 'Active' ? 'success' : 'secondary' %>">
+              <%= currentSubscription.status %>
+            </span><br>
+            <strong>Next Billing Date:</strong> <%= currentSubscription.nextBillingDate.toDateString() %><br>
+            <strong>Category:</strong> <%= currentSubscription.category %><br>
+            <strong>Note:</strong> <%= currentSubscription.notes %>
+          </p>
+          <form action="/subscriptions/<%= currentSubscription._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-danger" title="Delete">
+              <i class="fas fa-trash" ></i>
+            </button>
+          </form>
+          <a href="/subscriptions/<%= currentSubscription._id %>/edit">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-pen" ></i>
+            </button>
+          </a>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransaction">
+            Add Transaction
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="modal fade" id="addTransaction">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Transaction</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/transactions/<%= currentSubscription._id %>" method="POST">
+            <div class="mb-3">
+              <label for="amount" class="form-label">Amount</label>
+              <input type="number" name="amount" id="amount" class="form-control rounded-3" required />
+            </div>
+            <div class="mb-3">
+              <label for="datePaid" class="form-label">Date Paid</label>
+              <input type="date" name="datePaid" id="datePaid" class="form-control rounded-3" required/>
+            </div>
+            <div class="mb-3">
+              <label for="paid" class="form-label">Is It Paid?</label>
+              <select name="paid" id="paid" class="form-select rounded-3">
+                <option value="True">True</option>
+                <option value="False">False</option>
+              </select>
+            </div>
+        </div>
+        <div class="modal-footers d-flex justify-content-center align-items-center">
+          <button type="submit" class="btn btn-primary m-2 w-25" data-bs-dismiss="modal">Add</button>
+          <button type="button" class="btn btn-danger m-2 w-25" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
 </div>
