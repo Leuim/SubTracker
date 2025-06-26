@@ -5,8 +5,7 @@ const router = require('express').Router()
 router.get('/', async (req, res) => {
     try {
         const userSubscriptions = await Subscription.find({ owner: req.session.user._id }).populate('owner')
-        const subscriptionsTransactions = await Transaction.find({subscription: userSubscriptions._id})
-        res.render('subscriptions/index.ejs', { title: 'Subscriptions', userSubscriptions, subscriptionsTransactions })
+        res.render('subscriptions/index.ejs', { title: 'Subscriptions', userSubscriptions })
     } catch (error) {
         console.log(error);
         res.redirect('/')
@@ -68,9 +67,10 @@ router.put('/:subscriptionId', async (req, res) => {
 
 router.delete('/:subscriptionId', async (req,res)=>{
     try{
-        const currentSubscription = await Subscription.findById(req.params.subscreptionId)
+        const currentSubscription = await Subscription.findById(req.params.subscriptionId)
         if(currentSubscription.owner.equals(req.session.user._id)){
-            await Subscription.findByIdAndDelete(req.params.subscreptionId)
+            await Transaction.deleteMany({ subscription: currentSubscription._id });
+            await Subscription.findByIdAndDelete(req.params.subscriptionId)
             res.redirect('/subscriptions')
         }
     } catch(error){

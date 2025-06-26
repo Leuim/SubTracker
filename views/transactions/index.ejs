@@ -1,32 +1,77 @@
+<div class="container-fluid">
+    <div class="row m-3">
+        <div class="col d-flex justify-content-start">
+            <p class="mb-0 fw-bold ">
+                <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none"
+                    href="/transactions">Transactions</a>
+            </p>
+        </div>
+    </div>
+</div>
+<h2 class="fw-semibold text-center text-primary"> All Your Transactions</h2>
 <div class="container my-3">
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="bg-white shadow p-4 rounded-4 table-responsive">
-                <table class="table table-striped table-hover rounded-2">
-                    <thead class="table-primary">
-                    <h1 class=" mb-4 fs-3">Transactions</h1>
-                    <tr>
-                        <th>Amount</th>
-                        <th>Date Paid</th>
-                        <th>Paid</th>
-                        <th>Subscription Name</th>
-                        <th>Subscription Status</th>
-                    </tr>
+                <table class="table table-striped table-hover border">
+                    <thead class="table-secondary">
+                        <h4 class=" mb-4 text-primary fw-bold"><i class="fa-solid fa-credit-card"></i> Transactions</h4>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center ">Amount</th>
+                            <th class="text-center">Date Paid</th>
+                            <th class="text-center">Paid</th>
+                            <th class="text-center"> Subscription Name</th>
+                            <th class="text-center">Subscription Status</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
                     </thead>
                     <tbody>
-                       <% const formatDate=(date)=> {
-                        const d = new Date(date);
-                        return d.toISOString().split('T')[0];
-                        }; 
-                        userTransactions.forEach(transaction =>{ %>
-                        <tr>
-                            <td><%= transaction.amount %></td>
-                            <td><%= transaction.datePaid %></td>
-                            <td><%= formatDate(transaction.datePaid)%></td>
-                            <td><%= transaction.subscription.name %></td>
-                            <td><span class="badge bg-<%= transaction.subscription.status === 'Active' ? 'success' : 'secondary' %>"><%= transaction.subscription.status %></span></td>
-                        </tr>
-                        <% }) %>
+                        <% const formatDate=(date)=> {
+                            const d = new Date(date);
+                            return d.toISOString().split('T')[0];
+                            };
+                            let increment = 0
+                            userTransactions.forEach(transaction =>{ %>
+                            <tr>
+                                <td class="text-center align-middle">
+                                    <%= increment + 1%>    
+                                </td>
+                                <td class="text-center align-middle">
+                                    <%= transaction.amount.toFixed(2) %>BD
+                                </td>
+                                <td class="text-center align-middle">
+                                    <%= formatDate(transaction.datePaid) %>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <%= transaction.paid %>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <%= transaction.subscription.name %>
+                                </td>
+                                <td class="text-center align-middle"><span
+                                        class="badge  bg-<%= transaction.subscription.status === 'Active' ? 'success' : 'secondary' %>">
+                                        <%= transaction.subscription.status %>
+                                    </span></td>
+                                <td class="text-center">
+                                    <a href="/transactions/<%= transaction._id %>/edit">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <form action="/subscriptions/<%= transaction._id %>?_method=DELETE" method="POST"
+                                        style="display: inline;">
+                                        <button type="submit" class="btn btn-danger" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                            <% }) %>
                     </tbody>
                 </table>
             </div>

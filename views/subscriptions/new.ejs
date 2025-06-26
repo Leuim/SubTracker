@@ -1,3 +1,13 @@
+<div class="container-fluid">
+  <div class="row m-3">
+    <div class="col d-flex justify-content-start">
+      <p class="mb-0 fw-bold ">
+        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none" href="/subscriptions/new"> Add New Subscription</a>
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="fw-semibold text-center text-primary">Add New Subscriptions</h2>
 <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
@@ -21,11 +31,11 @@
           </div>
           <div class="mb-3">
             <label for="nextBillingDate" class="form-label">Next Billing Date</label>
-            <input type="date" name="nextBillingDate" id="nextBillingDate" class="form-control rounded-3">
+            <input type="date" name="nextBillingDate" id="nextBillingDate" class="form-control rounded-3" required>
           </div>
           <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select name="status" id="status" class="form-select rounded-3">
+            <select name="status" id="status" class="form-select rounded-3" required>
               <option value="Active">Active</option>
               <option value="Paused">Paused</option>
               <option value="Canceled">Canceled</option>

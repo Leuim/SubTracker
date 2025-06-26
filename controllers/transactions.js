@@ -61,4 +61,14 @@ router.post('/:subscriptionId', async (req,res)=>{
     }
 })
 
+router.get('/:transactionId/edit', async (req,res)=>{
+  try{
+    const currentTransaction = await Transaction.findById(req.params.transactionId).populate('subscription')
+    res.render('transactions/edit.ejs',{currentTransaction, title:'Edit Transaction'})
+  } catch(error){
+    console.log(error);
+    res.redirect('/')
+  }
+})
+
 module.exports = router

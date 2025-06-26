@@ -1,6 +1,6 @@
 <% if(user){ %>
-  <h1>Welcome to SubTrack, <%= user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase(); %>
+  <h1 class="m-3 fw-semibold">Welcome to SubTrack, <%= user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase(); %>
   </h1>
   <% }else{ %>
-    <h1>Welcome to SubTrack, Please sign in</h1>
+    <h1 class="m-3 fw-semibold">Welcome to SubTrack, Please sign in</h1>
     <% } %>
