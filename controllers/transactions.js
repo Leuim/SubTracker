@@ -46,7 +46,6 @@ const toBoolean = (str) => {
 
 router.post('/:subscriptionId', async (req,res)=>{
     try{
-    const currentSubscription = await Transaction.findById(req.params.subscriptionId)
     req.body.amount = Number(req.body.amount)
     req.body.owner = req.session.user._id
     req.body.subscription = req.params.subscriptionId
@@ -64,11 +63,34 @@ router.post('/:subscriptionId', async (req,res)=>{
 router.get('/:transactionId/edit', async (req,res)=>{
   try{
     const currentTransaction = await Transaction.findById(req.params.transactionId).populate('subscription')
-    res.render('transactions/edit.ejs',{currentTransaction, title:'Edit Transaction'})
+    res.render('transactions/edit.ejs',{currentTransaction, title:'Edit Transaction',error:[]})
   } catch(error){
     console.log(error);
     res.redirect('/')
   }
 })
 
+router.put('/:transactionId', async (req,res)=>{
+  try{
+  const currenttransaction = await Transaction.findById(req.params.transactionId)
+  req.body.amount = Number(req.body.amount)
+  req.body.paid = toBoolean(req.body.paid)
+  await Transaction.findByIdAndUpdate(currenttransaction._id, req.body)
+  res.redirect(`/subscriptions/${currenttransaction.subscription}`)
+  } catch (error) {
+    console.log(error);
+    res.redirect('/')
+  }
+})
+
+router.delete('/:transactionId',async (req,res)=>{
+  try {
+    const currenttransaction = await Transaction.findById(req.params.transactionId)
+    await Transaction.findByIdAndDelete(req.params.transactionId)
+    res.redirect(`/subscriptions/${currenttransaction.subscription}`)
+  } catch (error) {
+    console.log(error);
+    res.redirect('/')
+  }
+})
 module.exports = router
