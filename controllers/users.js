@@ -11,13 +11,16 @@ router.post('/sign-up', async (req, res) => {
     try {
         const userInDatabase = await User.findOne({ username: req.body.username });
         if (userInDatabase) {
-            res.render('auth/signup.ejs', { title: 'Sign Up', error: 'User is already in the database.' })
+            req.flash('error','User already in the database!')
+            return res.redirect('/auth/sign-up')
         }
         if (req.body.password !== req.body.confirmPassword) {
-            res.render('auth/signup.ejs', { title: 'Sign Up', error: 'Passwords do not match.' })
+            req.flash('error','Passwords do not match!')
+            return res.redirect('/auth/sign-up')
         }
         if (!validator.isEmail(req.body.email)) {
-            res.render('auth/signup.ejs', { title: 'Sign Up', error: 'Please enter a valid email.' })
+            req.flash('error','Not a valid email!')
+            return res.redirect('/auth/sign-up')
         }
         const hashedPassword = bcrypt.hashSync(req.body.password, 10)
         req.body.password = hashedPassword
@@ -28,6 +31,7 @@ router.post('/sign-up', async (req, res) => {
             email: user.email,
             _id: user._id
         }
+        req.flash('success','Sign-up successfully!')
         res.redirect('/')
     } catch (error) {
         console.log(error)
@@ -44,25 +48,31 @@ router.post('/sign-in', async (req, res) => {
     try {
         const userInDatabase = await User.findOne({ username: req.body.username })
         if (!userInDatabase) {
-            return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
+            req.flash('error','Login failed please try again.')
+            return res.redirect('/auth/sign-in')
+            // return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
         }
         if (userInDatabase.email !== req.body.email) {
-            return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
+            req.flash('error','Login failed please try again.')
+            return res.redirect('/auth/sign-in')
+            // return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
         }
         const checkPassword = bcrypt.compareSync(req.body.password, userInDatabase.password)
         if (!checkPassword) {
-            return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
+            req.flash('error','Login failed please try again.')
+            return res.redirect('/auth/sign-in')
+            // return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
         }
         req.session.user = {
             username: userInDatabase.username,
             email:userInDatabase.email,
             _id: userInDatabase._id
         }
-
-        res.redirect('/')
+        req.flash('success','Signed in successfully!')
+        return res.redirect('/')
     } catch (error) {
         console.log(error);
-        res.redirect('/')
+        return res.redirect('/')
     }
 })
 

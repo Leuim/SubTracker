@@ -9,9 +9,11 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
+const connectFlash = require('connect-flash');
 const isSignedIn = require('./middlewares/isSignedIn');
 const passUserToView = require('./middlewares/passUserToView');
 const passCurrentPathToView = require('./middlewares/passCurrentPathToView')
+const passFlashMessageToView = require('./middlewares/passFlashMessageToView');
 const path = require('path')
 const PORT = process.env.PORT ? process.env.PORT : "3000";
 
@@ -32,6 +34,8 @@ app.set('layout', './layouts/layout');
 app.use(passUserToView)
 app.use(passCurrentPathToView)
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(connectFlash())
+app.use(passFlashMessageToView)
 // DB connection
 
 mongoose.connect(process.env.MONGODB_URI)

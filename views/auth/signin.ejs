@@ -2,25 +2,39 @@
   <div class="row d-flex justify-content-center align-items-center">
     <div class="col-md-6 col-lg-4 ">
       <div class="bg-white p-4 rounded-4 shadow">
-        <h2 class="mb-3 fw-bold text-center">Sign In</h2>
-
-        <% if(error){ %>
-          <p class="mb-2 text-danger text-center"><%= error %></p>
-        <% } %>
-
-        <form action="/auth/sign-in" method="post">
-          <div class="mb-3">
-            <input type="text" name="username" id="username" placeholder="Username" class="form-control rounded-3">
+        <h2 class="mb-3 fw-bold text-center text-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+        </h2>
+        <% if(messages.error.length> 0){ %>
+          <div class="alert alert-danger alert-dismissible fade show" id="signinAlert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>
+              <%= messages.error %>
+            </strong>
           </div>
-          <div class="mb-3">
-            <input type="text" name="email" id="email" placeholder="E-mail" class="form-control rounded-3">
-          </div>
-          <div class="mb-4">
-            <input type="password" name="password" id="password" placeholder="Password" class="form-control rounded-3">
-          </div>
-          <button type="submit" class="btn btn-primary w-100 rounded-3">Sign in</button>
-        </form>
+          <% } %>
+            <form action="/auth/sign-in" method="post">
+              <div class="mb-3">
+                <input type="text" name="username" id="username" placeholder="Username" class="form-control rounded-3">
+              </div>
+              <div class="mb-3">
+                <input type="text" name="email" id="email" placeholder="E-mail" class="form-control rounded-3">
+              </div>
+              <div class="mb-4">
+                <input type="password" name="password" id="password" placeholder="Password"
+                  class="form-control rounded-3">
+              </div>
+              <button type="submit" class="btn btn-primary w-100 rounded-3">Sign in</button>
+            </form>
       </div>
     </div>
   </div>
 </div>
+<script>
+  setTimeout(() => {
+    const Alert = document.getElementById('signinAlert');
+    if (Alert) {
+      const signinAlert = bootstrap.Alert.getOrCreateInstance(Alert);
+      signinAlert.close();
+    }
+  }, 3000);
+</script>

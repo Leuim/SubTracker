@@ -1,12 +1,17 @@
 <div class="container-fluid">
     <div class="row m-3">
-      <div class="col d-flex justify-content-start">
-        <p class="mb-0 fw-bold ">
-          <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none" href="/subscriptions/<%= currentSubscription._id %>"> <%= currentSubscription.name %></a> / <a class="text-decoration-none" href="/subscriptions/<%= currentSubscription._id %>/edit">Edit</a>
-        </p>
-      </div>
+        <div class="col d-flex justify-content-start">
+            <p class="mb-0 fw-bold ">
+                <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none"
+                    href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none"
+                    href="/subscriptions/<%= currentSubscription._id %>">
+                    <%= currentSubscription.name %>
+                </a> / <a class="text-decoration-none"
+                    href="/subscriptions/<%= currentSubscription._id %>/edit">Edit</a>
+            </p>
+        </div>
     </div>
-  </div>
+</div>
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
@@ -28,37 +33,46 @@
                         <select name="billingCycle" id="billingCycle" class="form-select rounded-3">
                             <option value="Monthly" <% if(currentSubscription.billingCycle==='Monthly' ){ %> selected
                                 <% } %>>
-                                    Monthly</option>
+                                    Monthly
+                            </option>
                             <option value="Annual" <% if(currentSubscription.billingCycle==='Annual' ){ %> selected
                                 <% } %>>
-                                    Annual</option>
+                                    Annual
+                            </option>
                         </select>
                     </div>
                     <% const formatDate=(date)=> {
                         const d = new Date(date);
                         return d.toISOString().split('T')[0];
                         };
-                    %>
+                        %>
                         <div class="mb-3">
                             <label for="nextBillingDate" class="form-label">Next Billing Date</label>
                             <input type="date" name="nextBillingDate" id="nextBillingDate"
-                                class="form-control rounded-3" value="<%= formatDate(currentSubscription.nextBillingDate) %>">
+                                class="form-control rounded-3"
+                                value="<%= formatDate(currentSubscription.nextBillingDate) %>">
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select name="status" id="status" class="form-select rounded-3">
-                                <option value="Active" <% if(currentSubscription.status==='Active' ){ %> selected <%
-                                        } %>>Active</option>
-                                <option value="Paused" <% if(currentSubscription.status==='Paused' ){ %> selected <%
-                                        } %>>Paused</option>
-                                <option value="Canceled" <% if(currentSubscription.status==='Canceled' ){ %> selected
-                                    <% } %>>Canceled</option>
+                                <option value="Active" <% currentSubscription.status=== 'Active' ? 'selected' : '' %>>Active</option>
+                                <option value="Paused" <% currentSubscription.status=== 'Paused' ? 'selected' : '' %>>Paused</option>
+                                <option value="Canceled" <% currentSubscription.status=== 'Canceled' ? 'selected' : '' %>>Canceled </option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            <input type="text" name="category" id="category" class="form-control rounded-3"
-                                value="<%= currentSubscription.category %>" />
+                            <label for="category" class="form-label">Status</label>
+                            <select name="category" id="category" class="form-select rounded-3" required>
+                                <option value="Streaming" <% currentSubscription.category === 'Streaming' ? 'selected' : '' %>>Streaming</option>
+                                <option value="Utilities" <% currentSubscription.category === 'Utilities' ? 'selected' : '' %>>Utilities</option>
+                                <option value="Education" <% currentSubscription.category === 'Education' ? 'selected' : '' %>>Education</option>
+                                <option value="Gaming" <% currentSubscription.category === 'Gaming' ? 'selected' : '' %>>Gaming</option>
+                                <option value="Cloud/Storage" <% currentSubscription.category === 'Cloud/Storage' ? 'selected' : '' %>>Cloud/Storage</option>
+                                <option value="Shopping" <% currentSubscription.category === 'Shopping' ? 'selected' : '' %>>Shopping</option>
+                                <option value="Productivity" <% currentSubscription.category === 'Productivity' ? 'selected' : '' %>>Fitness/Health</option>
+                                <option value="Finance" <% currentSubscription.category === 'Finance' ? 'selected' : '' %>>Finance</option>
+                                <option value="Other" <% currentSubscription.category === 'Other' ? 'selected' : '' %>>Other</option>
+                            </select>
                         </div>
                         <div class="mb-4">
                             <label for="note" class="form-label">Notes</label>

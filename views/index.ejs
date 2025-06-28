@@ -1,6 +1,29 @@
-<% if(user){ %>
-  <h1 class="m-3 fw-semibold">Welcome to SubTrack, <%= user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase(); %>
-  </h1>
-  <% }else{ %>
-    <h1 class="m-3 fw-semibold">Welcome to SubTrack, Please sign in</h1>
-    <% } %>
+<div class="container-fluid d-flex flex-column  align-items-center"
+     style=" height:95vh; background-image: url(/uploads/background.jpg); background-size: cover; background-position: center;">
+  
+  <% if(user){ %>
+    <h1 class="m-3 fw-semibold text-dark">
+      Welcome to SubTrack, <%= user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase(); %>
+    </h1>
+  <% } else { %>
+    <h1 class="m-3 fw-semibold text-dark">Welcome to SubTrack, Please sign in</h1>
+  <% } %>
+
+  <% if(messages.success.length > 0){ %>
+    <div class="container col-4 alert alert-success alert-dismissible fade show" id="signinAlert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%= messages.success %></strong>
+    </div>
+  <% } %>
+
+</div>
+
+<script>
+  setTimeout(() => {
+    const Alert = document.getElementById('signinAlert');
+    if (Alert) {
+      const signinAlert = bootstrap.Alert.getOrCreateInstance(Alert);
+      signinAlert.close();
+    }
+  }, 3000);
+</script>

@@ -1,40 +1,54 @@
 const mongoose = require('mongoose');
 
 const subscriptionSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true
     },
-    amount:{
-        type:Number,
-        required:true
+    amount: {
+        type: Number,
+        required: true,
+        min:0
     },
-    billingCycle:{
-        type:String,
-        required:true,
-        enum:['Monthly','Annual']
+    billingCycle: {
+        type: String,
+        required: true,
+        enum: ['Monthly', 'Annual']
     },
-    nextBillingDate:{
-        type:Date,
-        required:true,
+    nextBillingDate: {
+        type: Date,
+        required: true,
     },
-    category:{
-        type:String
+    category: {
+        type: String,
+        enum: [
+            'Streaming',
+            'Utilities',
+            'Productivity',
+            'Education',
+            'Gaming',
+            'Cloud/Storage',
+            'Shopping',
+            'Fitness/Health',
+            'Finance',
+            'Other'
+        ],
+        required: true
     },
-    status:{
-        type:String,
-        required:true,
-        enum:['Active','Paused','Canceled']
+    status: {
+        type: String,
+        required: true,
+        enum: ['Active', 'Paused', 'Canceled']
     },
-    outstandingAmount:{
-        type:Number
+    outstandingAmount: {
+        type: Number
     },
-    notes:{
-        type:String
+    notes: {
+        type: String
     },
-    owner:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 

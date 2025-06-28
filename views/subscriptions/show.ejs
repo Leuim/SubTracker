@@ -2,46 +2,132 @@
   <div class="row m-3">
     <div class="col d-flex justify-content-start">
       <p class="mb-0 fw-bold ">
-        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none" href="/subscriptions/<%= currentSubscription._id %>"> <%= currentSubscription.name %></a>
+        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none"
+          href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none"
+          href="/subscriptions/<%= currentSubscription._id %>">
+          <%= currentSubscription.name %>
+        </a>
       </p>
     </div>
   </div>
 </div>
-<div class="contianer mt-5">
-  <div class="row mb-4 justify-content-center align-items-center">
-    <div class="col-2">
-      <div class="card shadow">
-        <div class="card-body">
-          <h3 class="card-title"><%= currentSubscription.name %></h3>
+<div class="container-fluid mt-5">
+  <div class="row g-4 justify-content-center">
+    <div class="col-6">
+      <div class="card h-100 shadow rounded-4 border-0">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title mb-3 text-primary fw-bold">
+            <i class="fas fa-clipboard-list me-2"></i>
+            <%= currentSubscription.name %>
+          </h5>
           <p class="card-text">
             <strong>Amount:</strong> $<%= currentSubscription.amount.toFixed(2) %><br>
-            <strong>Billing Cycle:</strong> <%= currentSubscription.billingCycle %><br>
-            <strong>Status:</strong> 
-            <span class="badge bg-<%= currentSubscription.status === 'Active' ? 'success' : 'secondary' %>">
-              <%= currentSubscription.status %>
-            </span><br>
-            <strong>Next Billing Date:</strong> <%= currentSubscription.nextBillingDate.toDateString() %><br>
-            <strong>Category:</strong> <%= currentSubscription.category %><br>
-            <strong>Note:</strong> <%= currentSubscription.notes %>
+              <strong>Billing Cycle:</strong>
+              <%= currentSubscription.billingCycle %><br>
+                <strong>Status:</strong>
+                <span class="badge bg-<%= currentSubscription.status === 'Active' ? 'success' : 'secondary' %>">
+                  <%= currentSubscription.status %>
+                </span><br>
+                <strong>Next Billing Date:</strong>
+                <%= currentSubscription.nextBillingDate.toDateString() %><br>
+                  <strong>Category:</strong>
+                  <%= currentSubscription.category %><br>
+                    <strong>Note:</strong>
+                    <%= currentSubscription.notes %>
           </p>
-          <form action="/subscriptions/<%= currentSubscription._id %>?_method=DELETE" method="POST" style="display: inline;">
-            <button type="submit" class="btn btn-danger" title="Delete">
-              <i class="fas fa-trash" ></i>
+          <div class="d-flex justify-content-center align-items-center">
+             <form action="/subscriptions/<%= currentSubscription._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger " title="Delete">
+              <i class="fas fa-trash"></i>
             </button>
           </form>
           <a href="/subscriptions/<%= currentSubscription._id %>/edit">
             <button type="submit" class="btn btn-primary">
-              <i class="fas fa-pen" ></i>
+              <i class="fas fa-pen"></i>
             </button>
           </a>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransaction">
-            Add Transaction
-          </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
- 
+  <div class="container my-3">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="bg-white shadow p-4 rounded-4 table-responsive">
+          <div class="d-flex justify-content-between mb-2">
+            <h4 class=" text-primary fw-semibold"><i class="fa-solid fa-credit-card"></i> Transactions</h4>
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+              data-bs-target="#addTransaction">
+              Add Transaction <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          <% if(subscriptionTransactions && subscriptionTransactions.length> 0) {%>
+            <table class="table table-striped table-hover border">
+              <thead class="table-secondary">
+
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center ">Amount</th>
+                  <th class="text-center">Date Paid</th>
+                  <th class="text-center">Paid</th>
+                  <th class="text-center">Edit</th>
+                  <th class="text-center">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% const formatDate=(date)=> {
+                  const d = new Date(date);
+                  return d.toISOString().split('T')[0];
+                  };
+                  let increment = 0
+                  subscriptionTransactions.forEach(transaction =>{ %>
+                  <tr>
+                    <td class="text-center align-middle">
+                      <%= increment + 1%>
+                    </td>
+                    <td class="text-center align-middle">
+                      <%= transaction.amount.toFixed(2) %>BD
+                    </td>
+                    <td class="text-center align-middle">
+                      <%= formatDate(transaction.datePaid) %>
+                    </td>
+                    <td class="text-center align-middle">
+                      <%= transaction.paid %>
+                    </td>
+                    <td class="text-center">
+                      <a href="/transactions/<%= transaction._id %>/edit">
+                        <button type="submit" class="btn btn-outline-primary">
+                          <i class="fa-solid fa-pen-to-square"></i> Edit
+                        </button>
+                      </a>
+                    </td>
+                    <td class="text-center">
+                      <form action="/transactions/<%= transaction._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-outline-danger">
+                          <i class="fa-solid fa-delete-left"></i> Delete
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+
+                  <% }) %>
+              </tbody>
+            </table>
+            <% } else { %>
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <p class="text-center text-capitalize fw-bold text-muted">
+                  You have not added any transaction yet.
+                </p>
+                <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal"
+                  data-bs-target="#addTransaction">Add Transaction</button>
+              </div>
+              <% }%>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div class="modal fade" id="addTransaction">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
@@ -57,7 +143,7 @@
             </div>
             <div class="mb-3">
               <label for="datePaid" class="form-label">Date Paid</label>
-              <input type="date" name="datePaid" id="datePaid" class="form-control rounded-3" required/>
+              <input type="date" name="datePaid" id="datePaid" class="form-control rounded-3" required />
             </div>
             <div class="mb-3">
               <label for="paid" class="form-label">Is It Paid?</label>
@@ -71,7 +157,7 @@
           <button type="submit" class="btn btn-primary m-2 w-25" data-bs-dismiss="modal">Add</button>
           <button type="button" class="btn btn-danger m-2 w-25" data-bs-dismiss="modal">Close</button>
         </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>
