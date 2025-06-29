@@ -1,72 +1,77 @@
 <div class="container-fluid">
-    <div class="row m-3">
-        <div class="col d-flex justify-content-start">
-            <p class="mb-0 fw-bold ">
-                <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none"
-                    href="/transactions">Transactions</a>
-            </p>
-        </div>
+  <div class="row m-3">
+    <div class="col d-flex justify-content-start">
+      <p class="mb-0 fw-bold ">
+        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/transactions">Transactions</a>
+      </p>
     </div>
+  </div>
 </div>
 <h2 class="fw-bold text-center text-muted"><i class="fa-solid fa-credit-card"></i> All Your Transactions</h2>
 <div class="container my-3">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div class="bg-white shadow p-4 rounded-4 table-responsive">
-                <table class="table table-striped table-hover border">
-                    <thead class="table-secondary">
-                        <h4 class=" mb-4 text-primary fw-semibold"><i class="fa-solid fa-credit-card"></i> Transactions</h4>
-                        <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center ">Amount</th>
-                            <th class="text-center">Date Paid</th>
-                            <th class="text-center">Paid</th>
-                            <th class="text-center"> Subscription Name</th>
-                            <th class="text-center">Subscription Status</th>
-                            <th class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% const formatDate=(date)=> {
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="bg-white shadow p-4 rounded-4 table-responsive">
+        <table class="table table-striped table-hover border">
+          <thead class="table-secondary">
+            <h4 class=" mb-4 text-primary fw-semibold"><i class="fa-solid fa-credit-card"></i> All Transactions</h4>
+            <% if(userTransactions && userTransactions.length > 0){ %>
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center ">Amount</th>
+              <th class="text-center">Date Paid</th>
+              <th class="text-center">Paid</th>
+              <th class="text-center"> Subscription Name</th>
+              <th class="text-center">Subscription Status</th>
+              <th class="text-center">Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% const formatDate=(date)=> {
                             const d = new Date(date);
                             return d.toISOString().split('T')[0];
                             };
                             let increment = 0
                             userTransactions.forEach(transaction =>{ %>
-                            <tr>
-                                <td class="text-center align-middle">
-                                    <%= increment + 1%>    
-                                </td>
-                                <td class="text-center align-middle">
-                                    <%= transaction.amount.toFixed(2) %>BD
-                                </td>
-                                <td class="text-center align-middle">
-                                    <%= formatDate(transaction.datePaid) %>
-                                </td>
-                                <td class="text-center align-middle">
-                                    <%= transaction.paid %>
-                                </td>
-                                <td class="text-center align-middle">
-                                    <%= transaction.subscription.name %>
-                                </td>
-                                <td class="text-center align-middle"><span
-                                        class="badge  bg-<%= transaction.subscription.status === 'Active' ? 'success' : 'secondary' %>">
-                                        <%= transaction.subscription.status %>
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <a href="/subscriptions/<%= transaction.subscription._id %>">
-                                        <button type="submit" class="btn btn-outline-primary">
-                                             More Info On <%=transaction.subscription.name%>
-                                        </button>
-                                    </a>
-                                </td>
-                              
-                            </tr>
-                            <% }) %>
-                    </tbody>
-                </table>
-            </div>
+            <tr>
+              <td class="text-center align-middle">
+                <%= increment + 1%>
+              </td>
+              <td class="text-center align-middle">
+                <%= transaction.amount.toFixed(2) %>BD
+              </td>
+              <td class="text-center align-middle">
+                <%= formatDate(transaction.datePaid) %>
+              </td>
+              <td class="text-center align-middle">
+                <%= transaction.paid %>
+              </td>
+              <td class="text-center align-middle">
+                <%= transaction.subscription.name %>
+              </td>
+              <td class="text-center align-middle"><span class="badge  bg-<%= transaction.subscription.status === 'Active' ? 'success' : 'secondary' %>">
+                  <%= transaction.subscription.status %>
+                </span>
+              </td>
+              <td class="text-center">
+                <a href="/subscriptions/<%= transaction.subscription._id %>">
+                  <button type="submit" class="btn btn-outline-primary">
+                    More Info On <%=transaction.subscription.name%>
+                  </button>
+                </a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <%} else { %>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <p class="text-center text-capitalize fw-bold text-muted">
+            You have not added any transaction yet.
+          </p>
         </div>
+        <% }%>
+      </div>
     </div>
+  </div>
 </div>

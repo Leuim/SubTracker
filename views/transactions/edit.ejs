@@ -1,13 +1,17 @@
-<h1>transactions edit</h1>
+<div class="container-fluid">
+  <div class="row m-3">
+    <div class="col d-flex justify-content-start">
+      <p class="mb-0 fw-bold ">
+        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none" href="/subscriptions/<%= currentTransaction.subscription._id %>"> <%= currentTransaction.subscription.name %></a> / <a class="text-decoration-none" href="/transactions/<%= currentTransaction.subscription._id %>/new"> Transaction Edit</a>
+      </p>
+    </div>
+  </div>
+</div>
 <div class="container py-5 ">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-md-6 col-lg-4 ">
         <div class="bg-white p-4 rounded-4 shadow">
           <h2 class="mb-3 fw-bold text-center">Edit transaction</h2>
-  
-          <% if(error){ %>
-            <p class="mb-2 text-danger text-center"><%= error %></p>
-          <% } %>
           <% const formatDate=(date)=> {
             const d = new Date(date);
             return d.toISOString().split('T')[0];

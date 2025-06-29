@@ -15,7 +15,12 @@
       <strong><%= messages.success %></strong>
     </div>
   <% } %>
-
+     <% if(messages.error.length > 0){ %>
+    <div class="container col-4 alert alert-danger alert-dismissible fade show" id="signinAlert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%= messages.error %></strong>
+    </div>
+  <% } %>
 </div>
 
 <script>

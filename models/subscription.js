@@ -41,7 +41,8 @@ const subscriptionSchema = new mongoose.Schema({
         enum: ['Active', 'Paused', 'Canceled']
     },
     outstandingAmount: {
-        type: Number
+        type: Number,
+        default:0
     },
     notes: {
         type: String

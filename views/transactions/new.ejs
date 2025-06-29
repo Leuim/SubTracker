@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row m-3">
+    <div class="col d-flex justify-content-start">
+      <p class="mb-0 fw-bold ">
+        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none" href="/subscriptions/new"> Add New
+          Subscription</a>
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="fw-bold text-center text-muted"><i class="fa-solid fa-circle-plus"></i> Add New Transaction To <%= currentSubscription.name %></h2>
+]<div class="container py-2 ">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-md-6 col-lg-4 ">
+        <div class="bg-white p-4 rounded-4 shadow">
+        <form action="/transactions/<%= currentSubscription._id %>" method="POST">
+          <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" name="amount" id="amount" class="form-control rounded-3" required />
+          </div>
+          <div class="mb-3">
+            <label for="datePaid" class="form-label">Date Paid</label>
+            <input type="date" name="datePaid" id="datePaid" class="form-control rounded-3" required />
+          </div>
+          <div class="mb-3">
+            <label for="paid" class="form-label">Is It Paid?</label>
+            <select name="paid" id="paid" class="form-select rounded-3">
+              <option value="True">True</option>
+              <option value="False">False</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <button type="submit" class="btn btn-primary m-2 w-100">Add</button>
+          </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  setTimeout(() => {
+    const Alert = document.getElementById('newSubAlert');
+    if (Alert) {
+      const signinAlert = bootstrap.Alert.getOrCreateInstance(Alert);
+      signinAlert.close();
+    }
+  }, 3000);
+</script>
