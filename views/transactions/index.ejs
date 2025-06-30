@@ -41,7 +41,11 @@
                 <%= transaction.amount.toFixed(2) %>BD
               </td>
               <td class="text-center align-middle">
+                <% if (transaction.paid){%>
                 <%= formatDate(transaction.datePaid) %>
+                <% } else {%>
+                  Not paid yet.
+                  <% } %>
               </td>
               <td class="text-center align-middle">
                 <%= transaction.paid %>

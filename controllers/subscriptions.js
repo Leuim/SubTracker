@@ -109,6 +109,7 @@ router.put('/:subscriptionId', async (req, res) => {
                 return res.redirect(`/subscriptions/${currentSubscription._id}/edit`)
             }
             await Subscription.findByIdAndUpdate(req.params.subscriptionId, req.body)
+            req.flash('success','Subscription has been edited successfully!')
             res.redirect(`/subscriptions/${currentSubscription._id}`)
         } else {
             req.flash('error', 'You dont have permission to do that.')
@@ -126,6 +127,7 @@ router.delete('/:subscriptionId', async (req, res) => {
         if (currentSubscription.owner.equals(req.session.user._id)) {
             await Transaction.deleteMany({ subscription: currentSubscription._id });
             await Subscription.findByIdAndDelete(req.params.subscriptionId)
+            req.flash('success','Subscription deleted successfully.')
             res.redirect('/subscriptions')
         } else {
             req.flash('error', 'You dont have permission to do that.')

@@ -6,8 +6,7 @@ const transactionSchema = new mongoose.Schema({
         required:true
     },
     datePaid:{
-        type:Date,
-        required:true
+        type:Date
     },
     paid:{
         type:Boolean,

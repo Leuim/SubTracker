@@ -8,35 +8,52 @@
   </div>
 </div>
 <div class="container py-5 ">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-md-6 col-lg-4 ">
-        <div class="bg-white p-4 rounded-4 shadow">
-          <h2 class="mb-3 fw-bold text-center">Edit transaction</h2>
-          <% const formatDate=(date)=> {
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-4">
+      <div class="bg-white p-4 rounded-4 shadow">
+        <h2 class="mb-3 fw-bold text-center">Edit transaction</h2>
+        <% if(messages.error.length > 0){ %>
+        <div class="container-fluid alert alert-danger alert-dismissible fade show" id="editTransactionAlert">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong><%= messages.error %></strong>
+        </div>
+        <% } %>
+        <% const formatDate=(date)=> {
             const d = new Date(date);
             return d.toISOString().split('T')[0];
             };
         %>
-          <form action="/transactions/<%=  currentTransaction._id %>?_method=PUT" method="post">
-            <div class="mb-3">
-                <label for="amount" class="form-label mb-2">Amount</label>
-              <input type="Number" name="amount" id="amount" placeholder="amount" class="form-control rounded-3" value="<%= currentTransaction.amount %>">
-            </div>
-            <div class="mb-3">
-                <label for="datePaid">Date Paid</label>
-              <input type="date" name="datePaid" id="datePaid" placeholder="datePaid" class="form-control rounded-3" value="<%= formatDate(currentTransaction.datePaid) %>">
-            </div>
-            <div class="mb-4">
+        <form action="/transactions/<%=  currentTransaction._id %>?_method=PUT" method="post">
+          <div class="mb-3">
+            <label for="amount" class="form-label mb-2">Amount</label>
+            <input type="Number" name="amount" id="amount" placeholder="amount" class="form-control rounded-3" value="<%= currentTransaction.amount %>">
+          </div>
+          <div class="mb-3">
+            <label for="datePaid">Date Paid</label>
+            <input type="date" name="datePaid" id="datePaid" placeholder="datePaid" class="form-control rounded-3" 
+            <% if(currentTransaction.paid) {%>
+            value="<%= formatDate(currentTransaction.datePaid) %>">
+            <% } %>
+          </div>
+          <div class="mb-4">
             <label for="paid" class="form-label">Is It Paid?</label>
-              <select name="paid" id="paid" class="form-select rounded-3">
-                <option value="True" <%= currentTransaction.paid === 'true' ? 'selected' : '' %>>True</option>
-                <option value="False" <%= currentTransaction.paid === 'false' ? 'selected' : '' %>>False</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary w-100 rounded-3">Edit Transaction</button>
-          </form>
-        </div>
+            <select name="paid" id="paid" class="form-select rounded-3">
+              <option value="True" <%= currentTransaction.paid === 'true' ? 'selected' : '' %>>True</option>
+              <option value="False" <%= currentTransaction.paid === 'false' ? 'selected' : '' %>>False</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 rounded-3">Edit Transaction</button>
+        </form>
       </div>
     </div>
   </div>
-  
+</div>
+<script>
+  setTimeout(() => {
+    const Alert = document.getElementById('editTransactionAlert');
+    if (Alert) {
+      const signinAlert = bootstrap.Alert.getOrCreateInstance(Alert);
+      signinAlert.close();
+    }
+  }, 3000);
+</script>

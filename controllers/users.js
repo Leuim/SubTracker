@@ -50,18 +50,15 @@ router.post('/sign-in', async (req, res) => {
         if (!userInDatabase) {
             req.flash('error','Login failed please try again.')
             return res.redirect('/auth/sign-in')
-            // return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
         }
         if (userInDatabase.email !== req.body.email) {
             req.flash('error','Login failed please try again.')
             return res.redirect('/auth/sign-in')
-            // return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
         }
         const checkPassword = bcrypt.compareSync(req.body.password, userInDatabase.password)
         if (!checkPassword) {
             req.flash('error','Login failed please try again.')
             return res.redirect('/auth/sign-in')
-            // return res.render('auth/signin.ejs', { title: 'Sign In', error: 'Login failed please try again.' })
         }
         req.session.user = {
             username: userInDatabase.username,

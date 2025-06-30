@@ -10,17 +10,23 @@
 </div>
 <h2 class="fw-bold text-center text-muted"><i class="fa-solid fa-circle-plus"></i> Add New Transaction To <%= currentSubscription.name %></h2>
 ]<div class="container py-2 ">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-md-6 col-lg-4 ">
-        <div class="bg-white p-4 rounded-4 shadow">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-4">
+      <div class="bg-white p-4 rounded-4 shadow">
+        <% if(messages.error.length > 0){ %>
+        <div class="container-fluid alert alert-danger alert-dismissible fade show" id="newTransactionAlert">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong><%= messages.error %></strong>
+        </div>
+        <% } %>
         <form action="/transactions/<%= currentSubscription._id %>" method="POST">
           <div class="mb-3">
             <label for="amount" class="form-label">Amount</label>
             <input type="number" name="amount" id="amount" class="form-control rounded-3" required />
           </div>
           <div class="mb-3">
-            <label for="datePaid" class="form-label">Date Paid</label>
-            <input type="date" name="datePaid" id="datePaid" class="form-control rounded-3" required />
+            <label for="datePaid" class="form-label">Date Paid <small class="text-primary">Leave empty if not paid yet.</small></label>
+            <input type="date" name="datePaid" id="datePaid" class="form-control rounded-3" />
           </div>
           <div class="mb-3">
             <label for="paid" class="form-label">Is It Paid?</label>
@@ -40,7 +46,7 @@
 </div>
 <script>
   setTimeout(() => {
-    const Alert = document.getElementById('newSubAlert');
+    const Alert = document.getElementById('newTransactionAlert');
     if (Alert) {
       const signinAlert = bootstrap.Alert.getOrCreateInstance(Alert);
       signinAlert.close();

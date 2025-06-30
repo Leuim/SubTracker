@@ -9,6 +9,12 @@
     </div>
   </div>
 </div>
+  <% if(messages.success.length > 0){ %>
+    <div class="container col-4 alert alert-success alert-dismissible fade show" id="subShowAlert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%= messages.success %></strong>
+    </div>
+  <% } %>
 <div class="container-fluid mt-5">
   <div class="row justify-content-center">
     <div class="col-6">
@@ -72,9 +78,13 @@
         <div class="d-flex justify-content-between mb-2">
           <h4 class=" text-primary fw-semibold"><i class="fa-solid fa-credit-card"></i> Transactions</h4>
           <% if (currentSubscription.status !== 'Active') { %>
-          <a class="btn btn-outline-primary disabled" tabindex="-1" aria-disabled="true">Add Transaction <i class="fa-solid fa-plus"></i></a>
+            <form action="">
+              <button class="btn btn-outline-primary" disabled>Add Transaction <i class="fa-solid fa-plus"></i></button>
+            </form>
           <% } else { %>
-          <a href="/transactions/<%= currentSubscription._id %>/new" class="btn btn-outline-primary">Add Transaction <i class="fa-solid fa-plus"></i></a>
+            <form action="/transactions/<%= currentSubscription._id %>/new" method="get">
+              <button class="btn btn-outline-primary">Add Transaction <i class="fa-solid fa-plus"></i></button>
+            </form>
           <% } %>
           </a>
         </div>
@@ -105,7 +115,11 @@
                 <%= transaction.amount.toFixed(2) %>BD
               </td>
               <td class="text-center align-middle">
+                <% if(transaction.paid) {%>
                 <%= formatDate(transaction.datePaid) %>
+                <% } else {%>
+                  Not paid yet.
+                  <% } %>
               </td>
               <td class="text-center align-middle">
                 <%= transaction.paid %>
@@ -134,17 +148,25 @@
           <p class="text-center text-capitalize fw-bold text-muted">
             <%  if(currentSubscription.status === 'Active'){%>
             You have not added any transaction yet.
+            <form action="/transactions/<%= currentSubscription._id %>/new" method="get">
+              <button class="btn btn-outline-primary">Add Transaction <i class="fa-solid fa-plus"></i></button>
+            </form>
             <% } else {%>
             please change the status to active to be able to add a new transaction.
             <% } %>
           </p>
-          <a href="/transactions/<%= currentSubscription._id %>/new">
-            <button class="btn btn-outline-primary" <%= currentSubscription.status !== 'Active' ? 'disabled' : ''%>>Add Transaction</button>
-          </a>
-
         </div>
         <% }%>
       </div>
     </div>
   </div>
 </div>
+<script>
+  setTimeout(() => {
+    const Alert = document.getElementById('subShowAlert');
+    if (Alert) {
+      const signinAlert = bootstrap.Alert.getOrCreateInstance(Alert);
+      signinAlert.close();
+    }
+  }, 3000);
+</script>
