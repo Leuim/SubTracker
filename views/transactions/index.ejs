@@ -38,7 +38,9 @@
                 <%= increment + 1%>
               </td>
               <td class="text-center align-middle">
+                <span class="text-danger">
                 <%= transaction.amount.toFixed(2) %>BD
+                  </span>
               </td>
               <td class="text-center align-middle">
                 <% if (transaction.paid){%>
