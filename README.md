@@ -4,7 +4,10 @@
 
 ![website landing page](https://i.imgur.com/QVE0ZJB.png)
 
-SubTracker is an application that allows you to track you subscriptions across the board for instance online subs like streaming services or actual utilities like electrecity and so on. it also allows you to create, update and delete transactions of a subscription. SubTracker is a unified place to track all your sub related expanses. **Why did I choose this project you may ask?** From my own expeirence I heard a lot of people pay a sub fee to certin things either online or in real life then forget about it after a while. What happens after they foget about them? well yeah they get charged and wonder why did they get charged for a service or something they do not use anymore. This is why I created this application to avoid these scenarios and to have a unified place to track all you subscriptions. 
+SubTracker is a simple, unified application designed to help you stay on top of all your subscriptions whether they’re online services like Netflix or Spotify, or real-world essentials like electricity or water bills. With SubTracker, you can easily create, update, and delete transactions tied to each subscription, making it easier to manage your recurring expenses in one place.
+
+**Why did I build this?**
+From personal experience I noticed a common issue: people often forget about subscriptions they signed up for. Whether it's an online service or a real-world utility, they end up getting charged for something they no longer use or need. That moment of confusion “Why was I charged for this?” is exactly what SubTracker aims to prevent. 
 
 # Getting started:
  You can view **SubTrack** by clicking on [**This**](https://subtracker-7ivg.onrender.com/) or the link below 
