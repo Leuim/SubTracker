@@ -3,8 +3,8 @@
     <ul class="nav">
       <li class="nav-item me-3"><a class="nav-link fw-bold <%=currentPath === '/' ? 'active' : ''%>" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
       <% if(user) { %>
-        <li class="nav-item me-3"><a class="nav-link fw-bold <%= currentPath.startsWith('/subscriptions') ? 'active' : '' %>" href="/subscriptions">Subscriptions</a></li>
-        <li class="nav-item"><a class="nav-link fw-bold <%= currentPath.startsWith('/transactions') ? 'active' : '' %>" href="/transactions">Transactions</a></li>
+        <li class="nav-item me-3"><a class="nav-link fw-bold <%= currentPath.startsWith('/subscriptions') ? 'active' : '' %>" href="/subscriptions"><i class="fa-solid fa-tags"></i> Subscriptions</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold <%= currentPath.startsWith('/transactions') ? 'active' : '' %>" href="/transactions"><i class="fa-solid fa-credit-card"></i> Transactions</a></li>
       <% } %>
     </ul>
     <ul class="nav">

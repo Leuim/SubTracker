@@ -33,7 +33,8 @@
             </li>
             <li class="list-group-item py-1">
               <strong>Status:</strong>
-              <span class="badge bg-<%= currentSubscription.status === 'Active' ? 'success' : 'secondary' %>">
+              <span class="badge bg-<%= currentSubscription.status === 'Active' ? 'success' : 
+                  currentSubscription.status === 'Canceled' ? 'danger' : 'secondary' %> ">
                 <%= currentSubscription.status %>
               </span>
             </li>
