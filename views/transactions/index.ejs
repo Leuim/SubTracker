@@ -53,7 +53,8 @@
               <td class="text-center align-middle">
                 <%= transaction.subscription.name %>
               </td>
-              <td class="text-center align-middle"><span class="badge  bg-<%= transaction.subscription.status === 'Active' ? 'success' : 'secondary' %>">
+              <td class="text-center align-middle"><span class="badge  bg-<%= transaction.subscription.status === 'Active' ? 'success' : 
+                  transaction.subscription.status === 'Canceled' ? 'danger' : 'secondary' %> ">
                   <%= transaction.subscription.status %>
                 </span>
               </td>
