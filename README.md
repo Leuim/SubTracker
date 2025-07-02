@@ -46,7 +46,7 @@ You can view my planning materials by clicking on [**This**](https://trello.com/
 * **validator**: For validating and sanitizing strings  
 
 # Future goals:
-1. **Implement email reminders when coming near a billing date.** 
+1. **Implement email reminders when approaching an upcoming billing date.** 
 2. **Automatic recording of transactions.**
 3. **Add a dashboard with stats and summary of subscriptions and transactions.**
-4. **search and filter features.** 
+4. **Search and filter features.** 
