@@ -2,8 +2,7 @@
   <div class="row m-3">
     <div class="col d-flex justify-content-start">
       <p class="mb-0 fw-bold ">
-        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none" href="/subscriptions/new"> Add New
-          Subscription</a>
+        <a class="text-decoration-none" href="/">Home</a> / <a class="text-decoration-none" href="/subscriptions">Subscriptions</a> / <a class="text-decoration-none" href="/subscriptions/<%= currentSubscription._id %>"> <%= currentSubscription.name  %></a> / <a class="text-decoration-none" href="/transaction/<%= currentSubscription._id  %>/new"> New Transaction</a>
       </p>
     </div>
   </div>
