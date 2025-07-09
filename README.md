@@ -23,6 +23,7 @@ You can view my planning materials by clicking on [**This**](https://trello.com/
 # Attributions:
 ### All the external Libraries/Assets that I used for this project:
 * [**Bootstrap 5**](https://getbootstrap.com) for all the stylings used in the website.
+* [**Bootstrap Tutorial**](https://www.w3schools.com/bootstrap5/index.php) The tutorial I used to learn and use bootstrap within the project.
 * [**Font awesome**](https://fontawesome.com) for all the Icons used in the website.
 * [**Perchance**](https://perchance.org/ai-icon-generator) Logo AI generator used for my favicon for the website.
 * [**Freep!c**](https://www.freepik.com/vectors) Used one of their images for the websites body background. 
