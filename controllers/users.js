@@ -35,12 +35,12 @@ router.post('/sign-up', async (req, res) => {
         res.redirect('/')
     } catch (error) {
         console.log(error)
-        res.send('Error')
+        res.redirect('/')
     }
 });
 
 router.get('/sign-in', async (req, res) => {
-    res.render('auth/signin.ejs', { title: 'Sign In', error: null })
+    res.render('auth/signin.ejs')
 })
 
 
